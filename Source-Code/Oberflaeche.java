@@ -9,16 +9,17 @@ import java.util.LinkedList;
 
 
 public class Oberflaeche {   
-//	calc Calc = new calc ();
+
 	Rechner rechner = new Rechner ();
 
+	
 	JFrame frame;
     JPanel panel;
     JButton buttonadd,buttonmin,buttonmal,buttonget,buttonwur, buttoner, buttondel,buttonans,
     		button0,button1, button2, button3, button4, button5, button6, button7, button8, button9, 
     		buttoncom, buttonbac, buttonsin,buttoncos,buttontan,buttonlog,buttonfac,buttonpro,
     		buttonpi,buttone,buttonhoch,buttonka,buttonkz,
-    		buttoninv, buttonln;
+    		buttoninv, buttonln, buttonasin, buttonacos, buttonatan;
     
     JRadioButton grad, rad;
     ButtonGroup group;
@@ -34,13 +35,14 @@ Oberflaeche (){
     frame = new JFrame ("Taschenrechner");
     JPanel panel = (JPanel)frame.getContentPane();
     
+    //Wahlmöglichkeit zwischen Bogenmaß und Grad
     grad = new JRadioButton ("GRAD");
     grad.setSize(20,20);
     grad.setLocation(10,270 );
     grad.setSelected(true);
     grad.setMnemonic(KeyEvent.VK_G);
     if (grad.isSelected()){
-    	boolean isGRAD = true;
+    	boolean GRAD = true;
     }
     
     rad = new JRadioButton ("RAD");
@@ -48,15 +50,19 @@ Oberflaeche (){
     rad.setLocation(10, 290);
     rad.setMnemonic(KeyEvent.VK_R);
     if (rad.isSelected()){
-    	boolean isGRAD = false; 
+    	boolean GRAD = false; 
     }
     
     group = new ButtonGroup ();
     group.add(grad);
     group.add(rad);
     
+    
+    
 //    Buttons 
-   
+    
+    //Zahlenblock
+    
     button7 = new JButton ("7");
     button7.setBounds(10,60,45,45);
     button7.setFocusable(true);
@@ -67,7 +73,6 @@ Oberflaeche (){
    });
     
     
-
     button8 = new JButton ("8");
     button8.setBounds(60,60,45,45);
     button8.addActionListener(new ActionListener(){
@@ -142,6 +147,7 @@ Oberflaeche (){
    	 }
    });
     
+    //Komma
     
     buttoncom = new JButton (",");
     buttoncom.setBounds(10,215,45,45);
@@ -160,12 +166,14 @@ Oberflaeche (){
    	 }
    });
     
-   
+    // Ist Gleich
+	
+
     buttoner = new JButton ("=");
     buttoner.setBounds(110,215,45,45);
     buttoner.addActionListener(new ActionListener(){ 
         public void actionPerformed(ActionEvent e){
-        
+        rechner.Ergebnis = rechner.Eingabe.toString();
         	 tf2.setText("" + rechner.getErgebnis() );
         	
        }
@@ -173,6 +181,7 @@ Oberflaeche (){
   
 //   buttoner.getRootPane().setDefaultButton(buttoner);
     
+   //Operatoren Buttons
     
     //Plus
      buttonadd = new JButton ("+");
@@ -222,7 +231,7 @@ Oberflaeche (){
          }
       });
      
-   
+    //Alles Löschen
      buttondel = new JButton ("C");
      buttondel.setBounds(157, 60, 40, 40);
      buttondel.setFont(new Font ("Arial",Font.BOLD,7));
@@ -235,7 +244,7 @@ Oberflaeche (){
     	 }
      });
      
-    
+    //Letztes Zeichen löschen
      buttonbac = new JButton ("\u232B");
      buttonbac.setBounds(200,60,65,40);
      buttonbac.addActionListener(new ActionListener (){
@@ -246,7 +255,7 @@ Oberflaeche (){
     	 }
      });
      
-     
+     // Ergebnis als Eingabe in tf1
      buttonans = new JButton("ANS");
 	 buttonans.setBounds(265, 60, 70, 40);
 	 buttonans.setFont(new Font ("Arial", Font.PLAIN, 11));
@@ -257,7 +266,7 @@ Oberflaeche (){
 			}	
 		});
 	 
-	 
+	 //Sinus
      buttonsin = new JButton ("sin");
      buttonsin.setBounds(200,100,45,40);
      buttonsin.setFont (new Font("Arial",Font.BOLD,7));
@@ -267,7 +276,7 @@ Oberflaeche (){
          }
       });
      
-     
+     //Cosinus
      buttoncos = new JButton ("cos");
      buttoncos.setBounds(245,100,45,40);
      buttoncos.setFont (new Font("Arial",Font.BOLD,6));
@@ -277,7 +286,7 @@ Oberflaeche (){
          }
       });
 	 
-	 
+	 //Tangens
      buttontan = new JButton ("tan");
      buttontan.setBounds(290,100,45,40);
      buttontan.setFont (new Font("Arial",Font.BOLD,6));
@@ -287,7 +296,7 @@ Oberflaeche (){
          }
       });
 	
-     
+     //Dekadiscer Logarithmus
      buttonlog = new JButton("log");
 	 buttonlog.setBounds(200, 140, 45, 40);
 	 buttonlog.setFont(new Font ("Arial", Font.BOLD, 5));
@@ -308,7 +317,7 @@ Oberflaeche (){
          }
       });
      
-     
+     //Prozent
      buttonpro = new JButton ("%");
      buttonpro.setBounds(290,140,45,40);
      buttonpro.setFont(new Font("Arial",Font.BOLD,7));
@@ -318,7 +327,7 @@ Oberflaeche (){
          }
       });
 	 
-	
+	 //Pi
 	 buttonpi = new JButton("\u03c0");
 	 buttonpi.setBounds(200, 180, 45, 40);
 	 buttonpi.setFont(new Font ("Arial", Font.PLAIN, 11));
@@ -329,7 +338,7 @@ Oberflaeche (){
 			}	
 		});
 	 
-	  
+	 //Fakultät 
 	 buttonfac = new JButton("!");
 	 buttonfac.setBounds(245, 180, 45, 40); 
 	 buttonfac.addActionListener(new ActionListener(){
@@ -339,7 +348,7 @@ Oberflaeche (){
 			}	
 		});
 	 
-	 
+	 //e
 	 buttone = new JButton("e");
 	 buttone.setBounds(290, 180, 45, 40);
 	 buttone.setFont(new Font ("Arial", Font.PLAIN, 10));
@@ -351,7 +360,7 @@ Oberflaeche (){
 		});
 	 
 	
-	 
+	 //Hoch
 	 buttonhoch = new JButton("^");
 	 buttonhoch.setBounds(200,220,45,40);
 	 buttonhoch.setFont(new Font("Arial",Font.PLAIN, 10));
@@ -362,7 +371,7 @@ Oberflaeche (){
 			}	
 		});
 	 
-	
+	//Klammer auf
 	 buttonka = new JButton("(");
 	 buttonka.setBounds(245, 220, 45, 40);
 	 buttonka.addActionListener(new ActionListener(){
@@ -372,7 +381,7 @@ Oberflaeche (){
 			}	
 		});
 	 
-	 
+	 //Klammer zu
 	 buttonkz = new JButton(")");
 	 buttonkz.setBounds(290, 220, 45, 40);
 	 buttonkz.addActionListener(new ActionListener(){
@@ -397,12 +406,55 @@ Oberflaeche (){
 			}	
 		});
 	 
+	 buttonasin = new JButton ("sin^-1");
+	 buttonasin.setBounds(200,100,45,40);
+	 buttonasin.setFont(new Font("Arial",Font.BOLD,5));
+	 buttonasin.setVisible(false);
+	 buttonasin.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e) {
+			tf1.setText(tf1.getText().concat("sin^-1("));
+			
+			}	
+		});
+	 
+	 
+	 buttonacos = new JButton ("cos^-1");
+	 buttonacos.setBounds(245,100,45,40);
+	 buttonacos.setFont(new Font("Arial",Font.BOLD,5));
+	 buttonacos.setVisible(false);
+	 buttonacos.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e) {
+			tf1.setText(tf1.getText().concat("cos^-1("));
+			
+			}	
+		});
+	 
+	 
+	 buttonatan = new JButton ("tan^-1");
+	 buttonatan.setBounds(290,100,45,40);
+	 buttonatan.setFont(new Font("Arial",Font.BOLD,5));
+	 buttonatan.setVisible(false);
+	 buttonatan.addActionListener(new ActionListener(){
+			
+			public void actionPerformed(ActionEvent e) {
+			tf1.setText(tf1.getText().concat("tan^-1("));
+			
+			}	
+		});
+	 
+	 
+	 
 	 buttoninv = new JButton ("INV");
 	 buttoninv.setBounds(200, 270, 135, 35);
 	 buttoninv.setBackground(Color.yellow);
 	 buttoninv.addActionListener(new ActionListener (){
 		 public void actionPerformed (ActionEvent e){
 		if (buttonln.isVisible()){
+			buttonatan.setVisible(true);
+			buttonasin.setVisible(false);
+			buttonacos.setVisible(false);
 			buttonln.setVisible(false);
 			buttonlog.setVisible(true);
 		    buttonlog.setEnabled(true);
@@ -417,15 +469,27 @@ Oberflaeche (){
 			buttone.setEnabled(true);
 			buttonkz.setEnabled(true);
 			buttonka.setEnabled (true);
-			
-			
+			buttonasin.setEnabled(false);
+			buttonln.setEnabled(false);
+			buttonacos.setEnabled(false);
+			buttonatan.setEnabled(false);
 		 }
 		else{buttonln.setVisible(true);
+			 buttonln.setEnabled(true);
+			 buttonatan.setEnabled(true);
+			 buttonatan.setVisible(true);
+			 buttonacos.setVisible(true);
+			 buttonacos.setEnabled(true);
+			 buttonasin.setVisible(true);
+			 buttonasin.setEnabled(true);
 			 buttonlog.setVisible(false);
 			 buttonlog.setEnabled(false);
 			 buttonsin.setEnabled(false);
+			 buttonsin.setVisible(false);
 			 buttoncos.setEnabled(false);
+			 buttoncos.setVisible(false);
 			 buttontan.setEnabled(false);
+			 buttontan.setVisible(false);
 			 buttonwur.setEnabled(false);
 			 buttonpro.setEnabled(false);
 			 buttonpi.setEnabled(false);
@@ -499,6 +563,9 @@ Oberflaeche (){
      panel.add(buttonkz);
      panel.add (buttoninv);
      panel.add (buttonln);
+     panel.add(buttonasin);
+     panel.add(buttonacos);
+     panel.add(buttonatan);
      
 //Layout des Frames:     
      frame.setLayout(null);
@@ -506,21 +573,13 @@ Oberflaeche (){
      frame.setResizable(false);
      frame.setVisible(true);
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     
-    
-    
-     
+   
      
     }
 
 
-//public static void main(String [] args){
-	//new Oberflaeche ();}
+public static void main(String [] args){
+	new Oberflaeche ();}
 
 
         }
-
-
-
-
-
