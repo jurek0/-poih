@@ -17,8 +17,8 @@ public class calc {
 			 for (int a = 0; a < Eingabe.size(); a++) {
 				 
 				
-				if (Eingabe.get(a).equals("*") || Eingabe.get(a).equals(":")  || 
-					Eingabe.get(a).equals("^") || Eingabe.get(a).equals("%") ) {
+				if (Eingabe.get(a).equals(" * ") || Eingabe.get(a).equals(" : ")  || 
+					Eingabe.get(a).equals(" ^ ") || Eingabe.get(a).equals(" % ") ) {
 					
 					double abc1 = 0;
 					double abc2 = 0;
@@ -41,26 +41,23 @@ public class calc {
 						abc2 = Double.parseDouble(Eingabe.get(a+1));
 					}
 
-					//Mal
+					//Mal rechnen
 					if (Eingabe.get(a).equals(" * ")) {
 						Ausgabe = abc1 * abc2;
 					}
 
-					
-					//Geteilt
+					//Geteilt mit divide by zero Exception rechnen
 				
 					if (Eingabe.get(a).equals(" : ") && abc2 != 0){
 						Ausgabe = abc1 / abc2;
 					} 
 					
-					
-					
-					//Hoch
+					//Hoch rechnen
 					if (Eingabe.get(a).equals(" ^ ")) {
 						Ausgabe = Math.pow(abc1, abc2);
 					}
 					
-					//%
+					// Mit % rechnen
 					if (Eingabe.get(a).equals("%")) {
 						Ausgabe = (abc2/100)*abc1;
 					}
@@ -70,40 +67,40 @@ public class calc {
 					Eingabe.remove(a-1);
 					return Eingabe;
 					} 
-				
-				//DOT-DUAL-PART-SUBCALCULATION (OPERATOR NUMBER)
-				if (Eingabe.get(a).equals("ln(") || Eingabe.get(a).equals("log(") || 
-					Eingabe.get(a).equals("wur") || Eingabe.get(a).equals("sin(") ||
-					Eingabe.get(a).equals("cos(") || Eingabe.get(a).equals("tan(")) {
+			
+				 //Rechenoperationen bei denen es nur eine Eingabe gibt (z.B cos(6) )
+				if (Eingabe.get(a).equals(" ln( ") || Eingabe.get(a).equals(" log( ") || 
+					Eingabe.get(a).equals(" wur ") || Eingabe.get(a).equals(" sin( ") ||
+					Eingabe.get(a).equals(" cos( ") || Eingabe.get(a).equals(" tan(" )) {
 					double abc2 = 0;
 					double Ausgabe = 0;
 					
-					if (Eingabe.get(a+1).equals("pi")) {
+					if (Eingabe.get(a+1).equals(" pi ")) {
 						abc2 = Math.PI;
-					} else if (Eingabe.get(a+1).equals("e")) {
+					} else if (Eingabe.get(a+1).equals(" e ")) {
 						abc2 = Math.E;
 					} else {
 						abc2 = Double.parseDouble(Eingabe.get(a+1));
 					}
 					
 					//Naürlicher Logarithmus
-					if (Eingabe.get(a).equals("ln(")) {
+					if (Eingabe.get(a).equals(" ln( ")) {
 						Ausgabe = Math.log(abc2);
 					}
 					
 					//Dekadischer Logarithmus
-					if (Eingabe.get(a).equals("log(")) {
+					if (Eingabe.get(a).equals(" log( ")) {
 						Ausgabe = Math.log10(abc2);
 					}
 					
 					//Wurzel
-					if (Eingabe.get(a).equals("wur")) {
+					if (Eingabe.get(a).equals(" wur ")) {
 						Ausgabe = Math.sqrt(abc2);
 					}
 				
 					
 					//Sinus
-					if (Eingabe.get(a).equals("sin(")) {
+					if (Eingabe.get(a).equals(" sin( ")) {
 						Ausgabe = Math.sin(abc2);
 						if (Winkel.equals("grad")) {
 //						Ausgabe = helper.getDegreeFromRadial(tempOUT);
@@ -128,40 +125,40 @@ public class calc {
 						return Eingabe;
 					}
 				
-				//LINE-TRI-PART-SUBCALCULATION (NUMBER OPERATOR NUMBER)
-				if ((Eingabe.get(a).equals("+") ||Eingabe.get(a).equals("-")) 
-					&& !((Eingabe.contains("*") ||Eingabe.contains(":") || 
-					Eingabe.contains("^")
-					|| Eingabe.contains("%") || Eingabe.contains("wur") || 
-					Eingabe.contains("ln") || Eingabe.contains("log")))) {
+				//Für Rechenoperationen mit verschiedenen Operatoren und mehreren Eingaben (z.B. 3+2*4)
+				if ((Eingabe.get(a).equals(" + ") ||Eingabe.get(a).equals(" - ")) 
+					&& !((Eingabe.contains(" * ") ||Eingabe.contains(" : ") || 
+					Eingabe.contains(" ^ ")
+					|| Eingabe.contains(" % ") || Eingabe.contains(" wur ") || 
+					Eingabe.contains(" ln( ") || Eingabe.contains(" log( ")))) {
 					double abc1 = 0;
 					double abc2 = 0;
 					double Ausgabe = 0;
 					
 					
-					if (Eingabe.get(a-1).equals("pi")) {
+					if (Eingabe.get(a-1).equals(" pi ")) {
 						abc1 = Math.PI;
-					} else if (Eingabe.get(a-1).equals("e")) {
+					} else if (Eingabe.get(a-1).equals(" e ")) {
 						abc1 = Math.E;
 					} else {
 						abc1 = Double.parseDouble(Eingabe.get(a-1));
 					}
 					
 				
-					if (Eingabe.get(a+1).equals("pi")) {
+					if (Eingabe.get(a+1).equals(" pi ")) {
 						abc2 = Math.PI;
-					} else if (Eingabe.get(a+1).equals("e")) {
+					} else if (Eingabe.get(a+1).equals(" e ")) {
 						abc2 = Math.E;
 					} else {
 						abc2 = Double.parseDouble(Eingabe.get(a+1));
 					}
 					
-					//Plus
-					if (Eingabe.get(a).equals("+")){
+					//Plus rechnen
+					if (Eingabe.get(a).equals(" + ")){
 					Ausgabe = abc1 + abc2;
 					}
 					
-					//Minus
+					//Minus rechnen
 					if (Eingabe.get(a).equals(" - ")){
 						Ausgabe = abc1 - abc2;
 						
