@@ -1,3 +1,5 @@
+package Source-Code;
+
 import java.util.LinkedList;
 
 
@@ -6,8 +8,7 @@ import java.util.LinkedList;
 public class calc {
 
 	 Oberflaeche rechenOberflaeche = new Oberflaeche ();
-		 Rechner rechner = new Rechner ();
-
+		 
 	
 	
 		 public LinkedList<String> getRechner (LinkedList<String> Eingabe, String Winkel)
